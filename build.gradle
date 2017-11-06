@@ -1,0 +1,50 @@
+group 'modularity'
+version '1.0-SNAPSHOT'
+
+
+
+
+
+buildscript {
+
+    ext {
+        junit_version = '4.12'
+        retrofit_version = '2.3.0'
+        kotlin_version = '1.1.51'
+        rxjava_version = '2.1.6'
+    }
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+apply plugin: 'kotlin'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    compile "io.reactivex.rxjava2:rxjava:$rxjava_version"
+    compile "com.squareup.okhttp3:logging-interceptor:3.9.0"
+    compile "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    compile "com.squareup.retrofit2:retrofit:$retrofit_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+
+
+    testCompile "junit:junit:$junit_version"
+    testCompile 'com.willowtreeapps.assertk:assertk:0.9'
+    testCompile "com.github.tomakehurst:wiremock:2.10.1"
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
