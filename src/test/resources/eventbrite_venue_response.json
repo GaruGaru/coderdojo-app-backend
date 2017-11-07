@@ -1,4 +1,23 @@
 {
-  "name": "venue-name",
-  "address": "venue-address"
+  "address": {
+    "address_1": "Piazza del Reclusorio",
+    "address_2": null,
+    "city": "Foligno",
+    "region": "Umbria",
+    "postal_code": "06034",
+    "country": "IT",
+    "latitude": "42.9561088",
+    "longitude": "12.69938460000003",
+    "localized_address_display": "Piazza del Reclusorio, 06034 Foligno",
+    "localized_area_display": "Foligno",
+    "localized_multi_line_address_display": [
+      "Piazza del Reclusorio",
+      "06034 Foligno"
+    ]
+  },
+  "resource_uri": "https://www.eventbriteapi.com/v3/venues/21933668/",
+  "id": "21933668",
+  "name": "Coworking Foligno Multiverso",
+  "latitude": "42.9561088",
+  "longitude": "12.69938460000003"
 }

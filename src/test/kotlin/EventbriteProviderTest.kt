@@ -29,7 +29,7 @@ class EventbriteProviderTest {
     fun setUp() {
 
         WireUtil.answer(
-                url = "/v3/events/search/?token=test-token&q=test-dojo&location.latitude=10.0&location.longitude=11.0&location.within=150.0KM&sort_by=distance&price=free",
+                url = "/v3/events/search/?token=test-token&q=test-dojo&location.latitude=10.0&location.longitude=11.0&location.within=150km&sort_by=distance&price=free",
                 response = Resource.read("/eventbrite_search_response.json")
         )
 
@@ -39,7 +39,7 @@ class EventbriteProviderTest {
         )
 
         WireUtil.answer(
-                url = "/v3/events/search/?token=test-token&q=test-error-500&location.latitude=10.0&location.longitude=11.0&location.within=150.0KM&sort_by=distance&price=free",
+                url = "/v3/events/search/?token=test-token&q=test-error-500&location.latitude=10.0&location.longitude=11.0&location.within=150km&sort_by=distance&price=free",
                 response = "500 Internal Error",
                 code = 500
         )
@@ -67,7 +67,11 @@ class EventbriteProviderTest {
                 assertValueAt(i, { it.description == e.description.text })
                 assertValueAt(i, { it.capacity == e.capacity?.toInt() })
                 assertValueAt(i, { it.participants == null })
-                assertValueAt(i, { it.location.address == venue.address })
+                assertValueAt(i, { it.location.name == venue.name })
+                assertValueAt(i, { it.location.latitude == venue.address.latitude?.toDouble() })
+                assertValueAt(i, { it.location.longitude == venue.address.longitude?.toDouble() })
+                assertValueAt(i, { it.location.postalCode == venue.address.postal_code })
+                assertValueAt(i, { it.location.address == venue.address.address_1 })
             }
         })
     }

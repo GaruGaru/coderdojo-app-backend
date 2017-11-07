@@ -2,7 +2,9 @@ package it.modularity.events.eventbrite
 
 
 import io.reactivex.Observable
+import io.reactivex.Scheduler
 import io.reactivex.functions.BiFunction
+import io.reactivex.schedulers.Schedulers
 import it.modularity.events.common.model.DojoEvent
 import it.modularity.events.common.model.DojoLocation
 import it.modularity.events.common.model.DojoOrganizer
@@ -16,15 +18,15 @@ class EventbriteProvider(private val token: String, private val api: EventbriteA
 
     companion object {
         val PLATFORM: String = "EVENTBRITE"
-        private val DEFAULT_UNIT: String = "KM"
+        private val DEFAULT_UNIT: String = "km"
     }
 
     override fun provide(query: String, latitude: Double, longitude: Double, range: Double): Observable<DojoEvent> {
-        return api.search(token, query, latitude, longitude, range.toString().plus(DEFAULT_UNIT))
+        return api.search(token, query, latitude, longitude, range.toInt().toString().plus(DEFAULT_UNIT))
                 .map { it.events?.toMutableList() }
                 .flatMap { Observable.fromIterable(it) }
                 .flatMap {
-                    Observable.zip(Observable.just(it), api.venue(it.venue_id, token),
+                    Observable.zip(Observable.just(it), api.venue(it.venue_id, token).subscribeOn(Schedulers.io()),
                             BiFunction<Event, Venue, DojoEvent> { t1, t2 -> createDojoEvent(t1, t2) })
                 }
     }
@@ -47,7 +49,15 @@ class EventbriteProvider(private val token: String, private val api: EventbriteA
 
     private fun epoch(formatted: String): Long = Instant.parse(formatted).toEpochMilli()
 
-    private fun Venue.toLocation(): DojoLocation = DojoLocation(this.address)
+    private fun Venue.toLocation(): DojoLocation = DojoLocation(
+             name = this.name,
+             address = this.address.address_1,
+             city = this.address.city,
+             country = this.address.country,
+             postalCode = this.address.postal_code,
+             latitude = this.address.latitude?.toDouble(),
+             longitude = this.address.longitude?.toDouble()
+    )
 
 }
 
