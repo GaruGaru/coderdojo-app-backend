@@ -21,8 +21,8 @@ class EventbriteProviderTest {
     @JvmField
     var wireMockRule = WireMockRule(9090)
 
-    lateinit var venue: Venue
-    lateinit var events: Array<Event>
+    private lateinit var venue: Venue
+    private lateinit var events: Array<Event>
 
     private val provider = EventbriteProvider(token = "test-token", api = EventbriteService("http://localhost:9090/").api)
 
