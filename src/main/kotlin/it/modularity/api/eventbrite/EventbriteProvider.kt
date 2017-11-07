@@ -33,17 +33,13 @@ class EventbriteProvider(private val token: String, private val api: EventbriteA
         return DojoEvent(
                 title = event.name.text,
                 description = event.description.text,
-                logo = event.logo.url,
-                icon = null,
+                logo = event.logo.url, icon = null,
                 ticketUrl = event.url,
-                startTime = epoch(event.start.utc),
-                endTime = epoch(event.end.utc),
-                capacity = event.capacity?.toInt(),
-                participants = null,
+                startTime = epoch(event.start.utc), endTime = epoch(event.end.utc),
+                capacity = event.capacity?.toInt(), participants = null,
                 location = venue.toLocation(),
                 organizer = organizerFrom(event.organizer_id),
-                free = event.is_free,
-                price = null
+                free = event.is_free
         )
     }
 
