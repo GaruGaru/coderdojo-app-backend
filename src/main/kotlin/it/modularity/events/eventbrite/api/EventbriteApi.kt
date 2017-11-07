@@ -1,8 +1,8 @@
-package it.modularity.api.eventbrite.api
+package it.modularity.events.eventbrite.api
 
 import io.reactivex.Observable
-import it.modularity.api.eventbrite.response.EventbriteSearchResult
-import it.modularity.api.eventbrite.response.Venue
+import it.modularity.events.eventbrite.response.EventbriteSearchResult
+import it.modularity.events.eventbrite.response.Venue
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

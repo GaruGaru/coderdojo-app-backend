@@ -1,4 +1,4 @@
-package it.modularity.api.eventbrite.api
+package it.modularity.events.eventbrite.api
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

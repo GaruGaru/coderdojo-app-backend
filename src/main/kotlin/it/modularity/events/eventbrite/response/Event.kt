@@ -1,4 +1,4 @@
-package it.modularity.api.eventbrite.response
+package it.modularity.events.eventbrite.response
 
 
 data class Event(

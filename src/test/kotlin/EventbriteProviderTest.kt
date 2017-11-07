@@ -2,12 +2,11 @@ import assertk.assert
 import assertk.assertions.hasSize
 import assertk.assertions.isEqualTo
 import com.github.tomakehurst.wiremock.junit.WireMockRule
-import com.google.gson.Gson
-import it.modularity.api.eventbrite.EventbriteProvider
-import it.modularity.api.eventbrite.api.EventbriteService
-import it.modularity.api.eventbrite.response.Event
-import it.modularity.api.eventbrite.response.EventbriteSearchResult
-import it.modularity.api.eventbrite.response.Venue
+import it.modularity.events.eventbrite.EventbriteProvider
+import it.modularity.events.eventbrite.api.EventbriteService
+import it.modularity.events.eventbrite.response.Event
+import it.modularity.events.eventbrite.response.EventbriteSearchResult
+import it.modularity.events.eventbrite.response.Venue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

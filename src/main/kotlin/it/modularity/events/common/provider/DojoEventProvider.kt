@@ -1,7 +1,7 @@
-package it.modularity.api.common.provider
+package it.modularity.events.common.provider
 
 import io.reactivex.Observable
-import it.modularity.api.common.model.DojoEvent
+import it.modularity.events.common.model.DojoEvent
 
 abstract class DojoEventProvider {
 

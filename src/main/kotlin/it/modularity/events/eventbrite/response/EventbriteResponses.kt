@@ -1,4 +1,4 @@
-package it.modularity.api.eventbrite.response
+package it.modularity.events.eventbrite.response
 
 data class Crop_mask(val height: String?, val width: String?, val top_left: Top_left?)
 

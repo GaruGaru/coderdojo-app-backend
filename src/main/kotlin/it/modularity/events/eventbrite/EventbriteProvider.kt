@@ -1,15 +1,15 @@
-package it.modularity.api.eventbrite
+package it.modularity.events.eventbrite
 
 
 import io.reactivex.Observable
 import io.reactivex.functions.BiFunction
-import it.modularity.api.common.model.DojoEvent
-import it.modularity.api.common.model.DojoLocation
-import it.modularity.api.common.model.DojoOrganizer
-import it.modularity.api.common.provider.DojoEventProvider
-import it.modularity.api.eventbrite.api.EventbriteApi
-import it.modularity.api.eventbrite.response.Event
-import it.modularity.api.eventbrite.response.Venue
+import it.modularity.events.common.model.DojoEvent
+import it.modularity.events.common.model.DojoLocation
+import it.modularity.events.common.model.DojoOrganizer
+import it.modularity.events.common.provider.DojoEventProvider
+import it.modularity.events.eventbrite.api.EventbriteApi
+import it.modularity.events.eventbrite.response.Event
+import it.modularity.events.eventbrite.response.Venue
 import java.time.Instant
 
 class EventbriteProvider(private val token: String, private val api: EventbriteApi) : DojoEventProvider() {

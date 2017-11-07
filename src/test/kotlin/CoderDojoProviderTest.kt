@@ -1,9 +1,9 @@
 import io.reactivex.Observable
-import it.modularity.api.CoderDojoEventsProvider
-import it.modularity.api.common.model.DojoEvent
-import it.modularity.api.common.model.DojoLocation
-import it.modularity.api.common.model.DojoOrganizer
-import it.modularity.api.common.provider.DojoEventProvider
+import it.modularity.events.DojoEventsProvider
+import it.modularity.events.common.model.DojoEvent
+import it.modularity.events.common.model.DojoLocation
+import it.modularity.events.common.model.DojoOrganizer
+import it.modularity.events.common.provider.DojoEventProvider
 import org.junit.Test
 import java.time.Instant
 import java.util.*
@@ -36,7 +36,7 @@ class CoderDojoProviderTest {
     fun testMergeResult() {
         val biProvider = FakeEventProvider(events = listOf(fakeEvent(), fakeEvent()))
         val singleProvider = FakeEventProvider(events = listOf(fakeEvent()))
-        val provider = CoderDojoEventsProvider(providers = listOf(singleProvider, biProvider))
+        val provider = DojoEventsProvider(providers = listOf(singleProvider, biProvider))
         val events = provider.provide("", 10.0, 11.1, 120.0).test()
         events.assertNoErrors()
                 .assertValueCount(3)
@@ -46,7 +46,7 @@ class CoderDojoProviderTest {
     fun testEmptyProvider(){
         val emptyProvider = FakeEventProvider(events = listOf())
         val singleProvider = FakeEventProvider(events = listOf(fakeEvent()))
-        val provider = CoderDojoEventsProvider(providers = listOf(singleProvider, emptyProvider))
+        val provider = DojoEventsProvider(providers = listOf(singleProvider, emptyProvider))
         val events = provider.provide("", 10.0, 11.1, 120.0).test()
         events.assertNoErrors()
                 .assertValueCount(1)
@@ -56,7 +56,7 @@ class CoderDojoProviderTest {
     fun testFailingProvider() {
         val failing = FailingEventProvider()
         val singleProvider = FakeEventProvider(events = listOf(fakeEvent()))
-        val provider = CoderDojoEventsProvider(providers = listOf(singleProvider, failing))
+        val provider = DojoEventsProvider(providers = listOf(singleProvider, failing))
         val events = provider.provide("", 10.0, 11.1, 120.0).test()
         events.assertError(RuntimeException::class.java)
     }
