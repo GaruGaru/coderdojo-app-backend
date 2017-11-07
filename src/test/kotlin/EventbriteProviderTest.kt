@@ -62,16 +62,15 @@ class EventbriteProviderTest {
 
         results.assertNoErrors().assertComplete()
 
-        this.events.forEachIndexed(
-                { i, e ->
-                    results.apply {
-                        assertValueAt(i, { it.title == e.name.text })
-                        assertValueAt(i, { it.description == e.description.text })
-                        assertValueAt(i, { it.capacity == e.capacity?.toInt() })
-                        assertValueAt(i, { it.participants == null })
-                        assertValueAt(i, { it.location.address == venue.address })
-                    }
-                })
+        this.events.forEachIndexed({ i, e ->
+            results.apply {
+                assertValueAt(i, { it.title == e.name.text })
+                assertValueAt(i, { it.description == e.description.text })
+                assertValueAt(i, { it.capacity == e.capacity?.toInt() })
+                assertValueAt(i, { it.participants == null })
+                assertValueAt(i, { it.location.address == venue.address })
+            }
+        })
     }
 
     @Test

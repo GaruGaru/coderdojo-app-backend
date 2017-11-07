@@ -51,7 +51,7 @@ class EventbriteProvider(private val token: String, private val api: EventbriteA
 
     private fun epoch(formatted: String): Long = Instant.parse(formatted).toEpochMilli()
 
-    private fun Venue.toLocation(): DojoLocation = DojoLocation(this.name, this.address)
+    private fun Venue.toLocation(): DojoLocation = DojoLocation(this.address)
 
 }
 

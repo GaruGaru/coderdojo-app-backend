@@ -27,7 +27,7 @@ class CoderDojoProviderTest {
             startTime = Instant.now().toEpochMilli(),
             endTime = Instant.now().toEpochMilli(),
             capacity = 10, participants = 5,
-            location = DojoLocation(address = "a street"),
+            location = DojoLocation("a street"),
             organizer = DojoOrganizer(id = "1", platform = "fake"),
             free = true
     )
