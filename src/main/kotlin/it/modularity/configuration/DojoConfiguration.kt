@@ -4,7 +4,7 @@ import it.modularity.confy.annotations.Param
 
 interface DojoConfiguration {
 
-    @Param.Integer(defaultValue = 8080)
+    @Param.Integer(defaultValue = 80)
     fun port(): Int
 
     @Param.String(key = "event.brite.token")

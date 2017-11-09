@@ -1,0 +1,8 @@
+version: "3.3"
+services:
+
+  coderdojo-backend:
+      image: garugaru/coderdojo-backend
+      build: ../
+      ports:
+        - 80:80

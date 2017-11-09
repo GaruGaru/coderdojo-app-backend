@@ -1,0 +1,20 @@
+version: '1.0'
+steps:
+
+  build_image:
+    type: build
+    description: Image build
+    image_name: garugaru/flink
+    tag: ${{CF_SHORT_REVISION}}
+
+  unit-tests:
+    image: ${{build_image}}
+    commands:
+      - ./gradlew test
+
+  push_image:
+    type: push
+    title: Image push
+    candidate: ${{build_image}}
+    tags:
+        - ${{CF_SHORT_REVISION}}
