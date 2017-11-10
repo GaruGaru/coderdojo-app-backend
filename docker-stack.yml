@@ -11,4 +11,4 @@ services:
         restart_policy:
           condition: on-failure
       environment:
-        EVENT_BRITE_TOKEN: ${EVENT_BRITE_TOKEN}
+        EVENT_BRITE_TOKEN: ${{EVENT_BRITE_TOKEN}}
