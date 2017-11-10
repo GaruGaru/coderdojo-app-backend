@@ -27,7 +27,7 @@ buildscript {
 
 }
 
-apply plugin: "net.saliman.cobertura"
+apply plugin: 'jacoco'
 apply plugin: 'kotlin'
 apply plugin: 'kotlin-kapt'
 
@@ -40,6 +40,7 @@ repositories {
     maven { url  "http://dl.bintray.com/kotlin/ktor" }
     maven { url "https://dl.bintray.com/kotlin/kotlinx" }
     maven { url 'https://jitpack.io' }
+    maven { url "http://repo1.maven.org/maven2/" }
 
 }
 
@@ -90,8 +91,6 @@ dependencies {
     testCompile "com.github.tomakehurst:wiremock:2.10.1"
 }
 
-
-
 sourceSets {
     main.java.srcDirs += [file("$buildDir/generated/source/kapt/main")]
 }
@@ -108,4 +107,23 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+task codeCoverageReport(type: JacocoReport) {
+    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
+
+    subprojects.each {
+        sourceSets it.sourceSets.main
+    }
+
+    reports {
+        xml.enabled true
+        xml.destination "${buildDir}/reports/jacoco/report.xml"
+        html.enabled false
+        csv.enabled false
+    }
+}
+
+codeCoverageReport.dependsOn {
+    subprojects*.test
 }
