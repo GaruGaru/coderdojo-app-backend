@@ -1,9 +1,12 @@
+import assertk.assert
+import assertk.assertions.isEqualTo
 import io.reactivex.Observable
 import it.modularity.events.DojoEventsProvider
 import it.modularity.events.common.model.DojoEvent
 import it.modularity.events.common.model.DojoLocation
 import it.modularity.events.common.model.DojoOrganizer
 import it.modularity.events.common.provider.DojoEventProvider
+import org.junit.Assert.assertThat
 import org.junit.Test
 import java.time.Instant
 import java.util.*
@@ -39,11 +42,13 @@ class CoderDojoProviderTest {
         val provider = DojoEventsProvider(providers = listOf(singleProvider, biProvider))
         val events = provider.provide("", 10.0, 11.1, 120.0).test()
         events.assertNoErrors()
-                .assertValueCount(3)
+                .assertValueCount(1)
+                .assertValue { it.size == 3 }
+
     }
 
     @Test
-    fun testEmptyProvider(){
+    fun testEmptyProvider() {
         val emptyProvider = FakeEventProvider(events = listOf())
         val singleProvider = FakeEventProvider(events = listOf(fakeEvent()))
         val provider = DojoEventsProvider(providers = listOf(singleProvider, emptyProvider))

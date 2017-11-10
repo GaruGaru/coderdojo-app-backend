@@ -12,6 +12,9 @@ import org.junit.Rule
 import org.junit.Test
 import util.Resource
 import util.WireUtil
+import io.reactivex.subscribers.TestSubscriber
+
+
 
 
 class EventbriteProviderTest {
@@ -56,8 +59,11 @@ class EventbriteProviderTest {
 
         val results = provider.provide(query = "test-dojo", latitude = 10.0, longitude = 11.0, range = 150.0)
                 .test()
+                .await()
 
-        assert(results.valueCount()).isEqualTo(this.events.size)
+        results.assertNoErrors().assertComplete()
+
+        assert(results.valueCount()).isEqualTo(2)
 
         results.assertNoErrors().assertComplete()
 
