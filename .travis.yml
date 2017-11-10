@@ -1,0 +1,14 @@
+language: groovy
+
+script: mvn clean verify
+after_success:
+  - gradle check
+  - bash <(curl -s https://codecov.io/bash)
+
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
