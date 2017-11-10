@@ -1,8 +1,7 @@
 language: groovy
 
-script: mvn clean verify
+script: gradle check
 after_success:
-  - gradle check
   - bash <(curl -s https://codecov.io/bash)
 
 before_cache:
