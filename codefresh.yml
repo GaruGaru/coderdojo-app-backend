@@ -28,7 +28,7 @@ steps:
       - rdocker ${{RDOCKER_HOST}} docker service update --force --image garugaru/coderdojo-app-backend:${{CF_SHORT_REVISION}} ${{STACK_NAME}}_backend
     environment:
       - SSH_KEY=${{SSH_KEY}}
-      - EVENT_BRITE_TOKEN=${EVENT_BRITE_TOKEN}
+      - EVENT_BRITE_TOKEN=${{EVENT_BRITE_TOKEN}}
     when:
       branch:
         only:

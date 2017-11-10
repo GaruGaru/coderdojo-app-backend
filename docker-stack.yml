@@ -2,7 +2,7 @@
 version: "3"
 services:
 
-  portfolio:
+  backend:
       image: garugaru/coderdojo-app-backend
       ports:
         - 8089:80
