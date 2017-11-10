@@ -13,6 +13,7 @@ class CoderDojoBackend {
     fun run(configuration: DojoConfiguration) {
 
         this.server.get("/", ProbeHandler())
+        this.server.get("/probe", ProbeHandler())
         this.server.get("/api/v1/events", EventsHandlerV1(configuration))
 
         this.server
