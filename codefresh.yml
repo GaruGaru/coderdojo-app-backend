@@ -19,3 +19,16 @@ steps:
     tags:
         - ${{CF_SHORT_REVISION}}
         - latest
+
+  deploy_to_swarm:
+    image: codefresh/remote-docker:latest
+    working_directory: ${{main_clone}}
+    commands:
+      - rdocker ${{RDOCKER_HOST}} docker stack deploy --compose-file docker-stack.yml ${{STACK_NAME}}
+      - rdocker ${{RDOCKER_HOST}} docker service update --force --image garugaru/coderdojo-app-backend:${{CF_SHORT_REVISION}} ${{STACK_NAME}}_backend
+    environment:
+      - SSH_KEY=${{SSH_KEY}}
+    when:
+      branch:
+        only:
+          - master

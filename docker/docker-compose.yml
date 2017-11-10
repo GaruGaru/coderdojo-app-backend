@@ -7,4 +7,4 @@ services:
       ports:
         - 80:80
       environment:
-        - "EVENT_BRITE_TOKEN": "TOKEN"
+        - EVENT_BRITE_TOKEN: "TOKEN"

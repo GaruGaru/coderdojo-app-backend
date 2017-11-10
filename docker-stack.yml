@@ -1,0 +1,14 @@
+
+version: "3"
+services:
+
+  portfolio:
+      image: garugaru/coderdojo-app-backend
+      ports:
+        - 8089:80
+      deploy:
+        replicas: 1
+        restart_policy:
+          condition: on-failure
+      environment:
+        EVENT_BRITE_TOKEN: ${{EVENTBRITE_TOKEN}}
