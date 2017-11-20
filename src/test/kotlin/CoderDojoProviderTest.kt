@@ -44,7 +44,6 @@ class CoderDojoProviderTest {
         events.assertNoErrors()
                 .assertValueCount(1)
                 .assertValue { it.size == 3 }
-
     }
 
     @Test

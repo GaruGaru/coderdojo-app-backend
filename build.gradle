@@ -68,6 +68,11 @@ dependencies {
 
     compile 'io.javalin:javalin:1.0.0'
 
+    // Redis
+
+    compile group: 'redis.clients', name: 'jedis', version: '2.9.0'
+
+
     // Dagger2
     //kapt "com.google.dagger:dagger-compiler:$dagger_version"
     //compile "com.google.dagger:dagger:$dagger_version"
