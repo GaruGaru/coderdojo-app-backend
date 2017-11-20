@@ -31,6 +31,8 @@ class EventbriteProvider(private val token: String, private val api: EventbriteA
                 }
     }
 
+
+
     private fun createDojoEvent(event: Event, venue: Venue): DojoEvent {
         return DojoEvent(
                 title = event.name.text,
