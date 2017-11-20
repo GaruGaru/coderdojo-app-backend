@@ -19,7 +19,7 @@ data class Venue(
         val address: Address,
         val resource_uri: String,
         val id: String,
-        val name: String,
+        val name: String?,
         val latitude: String,
         val longitude: String
 )

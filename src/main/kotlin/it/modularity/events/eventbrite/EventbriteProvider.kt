@@ -50,13 +50,13 @@ class EventbriteProvider(private val token: String, private val api: EventbriteA
     private fun epoch(formatted: String): Long = Instant.parse(formatted).toEpochMilli()
 
     private fun Venue.toLocation(): DojoLocation = DojoLocation(
-             name = this.name,
-             address = this.address.address_1,
-             city = this.address.city.orEmpty(),
-             country = this.address.country,
-             postalCode = this.address.postal_code,
-             latitude = this.address.latitude?.toDouble(),
-             longitude = this.address.longitude?.toDouble()
+            address = this.address.address_1,
+            city = this.address.city.orEmpty(),
+            name = this.name.orEmpty(),
+            country = this.address.country,
+            postalCode = this.address.postal_code,
+            latitude = this.address.latitude?.toDouble(),
+            longitude = this.address.longitude?.toDouble()
     )
 
 }
