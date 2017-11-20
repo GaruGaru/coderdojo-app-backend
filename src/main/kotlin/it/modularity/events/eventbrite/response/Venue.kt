@@ -4,7 +4,7 @@ package it.modularity.events.eventbrite.response
 data class Address(
         val address_1: String,
         val address_2: String?,
-        val city: String,
+        val city: String?,
         val country: String,
         val region: String,
         val postal_code: String,

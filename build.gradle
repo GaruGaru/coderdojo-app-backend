@@ -64,7 +64,7 @@ dependencies {
 
     // Configuration
 
-    compile 'com.github.GaruGaru:confy2:1.1'
+    compile 'com.github.GaruGaru:confy2:1.3'
 
     compile 'io.javalin:javalin:1.0.0'
 

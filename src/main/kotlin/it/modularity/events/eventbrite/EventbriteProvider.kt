@@ -31,8 +31,6 @@ class EventbriteProvider(private val token: String, private val api: EventbriteA
                 }
     }
 
-
-
     private fun createDojoEvent(event: Event, venue: Venue): DojoEvent {
         return DojoEvent(
                 title = event.name.text,
@@ -54,7 +52,7 @@ class EventbriteProvider(private val token: String, private val api: EventbriteA
     private fun Venue.toLocation(): DojoLocation = DojoLocation(
              name = this.name,
              address = this.address.address_1,
-             city = this.address.city,
+             city = this.address.city.orEmpty(),
              country = this.address.country,
              postalCode = this.address.postal_code,
              latitude = this.address.latitude?.toDouble(),
