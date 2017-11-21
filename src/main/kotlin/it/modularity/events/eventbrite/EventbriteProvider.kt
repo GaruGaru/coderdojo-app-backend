@@ -53,7 +53,7 @@ class EventbriteProvider(private val token: String, private val api: EventbriteA
             address = this.address.address_1,
             city = this.address.city.orEmpty(),
             name = this.name.orEmpty(),
-            country = this.address.country,
+            country = this.address.country.orEmpty(),
             postalCode = this.address.postal_code,
             latitude = this.address.latitude?.toDouble(),
             longitude = this.address.longitude?.toDouble()
