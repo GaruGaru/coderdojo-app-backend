@@ -40,7 +40,7 @@ data class Event(
 
         val listed: String?,
 
-        val logo: Logo,
+        val logo: Logo?,
 
         val hide_end_date: String?,
 

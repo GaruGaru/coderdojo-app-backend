@@ -3,8 +3,10 @@ package it.modularity.events.eventbrite
 
 import io.reactivex.Observable
 import io.reactivex.Scheduler
+import io.reactivex.Single
 import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
+import it.modularity.cache.Cache
 import it.modularity.events.common.model.DojoEvent
 import it.modularity.events.common.model.DojoLocation
 import it.modularity.events.common.model.DojoOrganizer
@@ -14,7 +16,7 @@ import it.modularity.events.eventbrite.response.Event
 import it.modularity.events.eventbrite.response.Venue
 import java.time.Instant
 
-class EventbriteProvider(private val token: String, private val api: EventbriteApi) : DojoEventProvider() {
+class EventbriteProvider(private val token: String, private val api: EventbriteApi, private val cache: Cache<String, Venue>? = null) : DojoEventProvider() {
 
     companion object {
         val PLATFORM: String = "EVENTBRITE"
@@ -26,7 +28,7 @@ class EventbriteProvider(private val token: String, private val api: EventbriteA
                 .map { it.events?.toMutableList() }
                 .flatMap { Observable.fromIterable(it) }
                 .flatMap {
-                    Observable.zip(Observable.just(it), api.venue(it.venue_id, token).subscribeOn(Schedulers.io()),
+                    Observable.zip(Observable.just(it), getVenue(it.venue_id).subscribeOn(Schedulers.io()),
                             BiFunction<Event, Venue, DojoEvent> { t1, t2 -> createDojoEvent(t1, t2) })
                 }
     }
@@ -35,7 +37,7 @@ class EventbriteProvider(private val token: String, private val api: EventbriteA
         return DojoEvent(
                 title = event.name.text,
                 description = event.description.text,
-                logo = event.logo.url, icon = null,
+                logo = event.logo?.url, icon = null,
                 ticketUrl = event.url,
                 startTime = epoch(event.start.utc), endTime = epoch(event.end.utc),
                 capacity = event.capacity?.toInt(), participants = null,
@@ -43,6 +45,10 @@ class EventbriteProvider(private val token: String, private val api: EventbriteA
                 organizer = organizerFrom(event.organizer_id),
                 free = event.is_free
         )
+    }
+
+    private fun getVenue(id: String): Observable<Venue> {
+        return api.venue(id, token)
     }
 
     private fun organizerFrom(id: String): DojoOrganizer = DojoOrganizer(id = id, platform = PLATFORM)

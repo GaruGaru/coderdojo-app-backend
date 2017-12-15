@@ -10,4 +10,10 @@ interface DojoConfiguration {
     @Param.String(key = "event.brite.token")
     fun eventBriteToken(): String
 
+    @Param.String()
+    fun redisHost(): String
+
+    @Param.Integer
+    fun redisPort(): Int
+
 }
