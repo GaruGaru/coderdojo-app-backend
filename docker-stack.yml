@@ -6,9 +6,16 @@ services:
       image: garugaru/coderdojo-app-backend
       ports:
         - 8089:80
+      environment:
+        EVENT_BRITE_TOKEN: ${EVENT_BRITE_TOKEN}
+      networks:
+        - proxy
       deploy:
+        labels:
+          - traefik.docker.network=proxy
+          - traefik.port=80
+          - traefik.frontend.rule=Host:dojo.garu.pizza
+        mode: replicated
         replicas: 1
         restart_policy:
           condition: on-failure
-      environment:
-        EVENT_BRITE_TOKEN: ${EVENT_BRITE_TOKEN}
